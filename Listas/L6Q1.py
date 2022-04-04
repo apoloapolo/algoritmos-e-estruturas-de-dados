@@ -105,17 +105,17 @@ class Lista:
         if removido == None:
             print("Valor não pode ser removido pois não existe na lista")
         else:
-            if self.tamanho > 1 and removido.proximo != self.cabeca:
+            if self.tamanho > 1 and removido == self.cabeca:
+                self.cabeca.proximo.anterior = self.cabeca.anterior
+                self.cabeca = self.cabeca.proximo
+                self.tamanho-=1
+            elif self.tamanho > 1 and removido.proximo != self.cabeca:
                 removido.anterior.proximo = removido.proximo
                 removido.proximo.anterior = removido.anterior
                 self.tamanho-=1
             elif self.tamanho > 1 and removido.proximo == self.cabeca:
                 removido.anterior.proximo = self.cabeca
                 self.cabeca.anterior = removido.anterior
-                self.tamanho-=1
-            elif self.tamanho > 1 and removido == self.cabeca:
-                self.cabeca.proximo.anterior = self.cabeca.anterior
-                self.cabeca = self.cabeca.proximo
                 self.tamanho-=1
             else:
                 self.cabeca = None
