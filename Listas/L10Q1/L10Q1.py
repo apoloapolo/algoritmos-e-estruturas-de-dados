@@ -1,11 +1,11 @@
 #Aluno: Vinicius Augusto Andrade Albuquerque (Apolo)
 
-
 no_responsavel = None
 rd = False
 re = False
 rdd = False
 red = False
+string_ordem = ""
 
 class No:
     def __init__(self,chave):
@@ -93,71 +93,103 @@ class ArvoreAVL:
             self.definirFatorBalanceamento(pt.direita)
 
     def ordem(self, pt):
+        global string_ordem
         if pt.esquerda != None:
             self.ordem(pt.esquerda)
         if pt.fatorBalanceamento > 0:
-            print(f"{pt.chave}(+{pt.fatorBalanceamento})"  , end= " ")
+            string_ordem += str(pt.chave)+"("+"+"+str(pt.fatorBalanceamento)+")"
+            string_ordem += " "
         else:
-            print(f"{pt.chave}({pt.fatorBalanceamento})"  , end= " ")
+            string_ordem += str(pt.chave)+"("+str(pt.fatorBalanceamento)+")"
+            string_ordem += " "
         if pt.direita != None:
             self.ordem(pt.direita)
 
-# 45 30 18 60 81 36 101 5 8 3
-arquivo = open(, 'r')
-for linha in arquivo:
-    print(linha)
+def resetarStringOrdem():
+    global string_ordem
+    string_ordem = ""
 
-arvore = ArvoreAVL()
-raiz = None
-lista = [17, 90, 87, 30, 23, 6, 84, 60, 3]
+entrada = open('L10Q1_in.txt', 'r')
+lista_arvores = []
+for linha in entrada:
+    lista_arvores.append(linha.split())
+print(lista_arvores)
+entrada.close
+saida = open('L10Q1_out.txt', 'w')
+saida.close
 
-"""for i in lista:
-    no_responsavel = None
-    rd = False
-    re = False
-    rdd = False
-    red = False
-    raiz = arvore.inserir(raiz, i)
-    if not no_responsavel:
-        print("arvore ja balanceada.")
-        arvore.definirFatorBalanceamento(raiz)
-        arvore.ordem(raiz)
-        print()
-        print(f"{arvore.altura}")
-    else:
-        if rd:
-            print(f"no responsavel: {no_responsavel}")
-            arvore.ordem(raiz)
-            print()
-            print("rotacao direita.")
+for a in lista_arvores:
+    arvore = ArvoreAVL()
+    raiz = None
+    resetarStringOrdem()
+    for i in a:
+        no_responsavel = None
+        rd = False
+        re = False
+        rdd = False
+        red = False
+        saida = open('L10Q1_out.txt', 'a')
+        raiz = arvore.inserir(raiz, int(i))
+        if not no_responsavel:
+            saida.write("arvore ja balanceada.\n")
             arvore.definirFatorBalanceamento(raiz)
             arvore.ordem(raiz)
-            print()
-            print(f"{arvore.altura}")
-        elif re:
-            print(f"no responsavel: {no_responsavel}")
-            arvore.ordem(raiz)
-            print()
-            print("rotacao esquerda.")
-            arvore.definirFatorBalanceamento(raiz)
-            arvore.ordem(raiz)
-            print()
-            print(f"{arvore.altura}")
-        elif rdd:
-            print(f"no responsavel: {no_responsavel}")
-            arvore.ordem(raiz)
-            print()
-            print("rotacao direita dupla.")
-            arvore.definirFatorBalanceamento(raiz)
-            arvore.ordem(raiz)
-            print()
-            print(f"{arvore.altura}")
-        elif red:
-            print(f"no responsavel: {no_responsavel}")
-            arvore.ordem(raiz)
-            print()
-            print("rotacao esquerda dupla.")
-            arvore.definirFatorBalanceamento(raiz)
-            arvore.ordem(raiz)
-            print()
-            print(f"{arvore.altura}")"""
+            saida.write(string_ordem + "\n")
+            resetarStringOrdem()
+            saida.write(str(arvore.altura) + "\n")
+            saida.close
+        else:
+            if rd:
+                saida.write("no responsavel: " + str(no_responsavel) + "\n")
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write("rotacao direita.\n")
+                arvore.definirFatorBalanceamento(raiz)
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write(str(arvore.altura) + "\n")
+                saida.close
+            elif re:
+                saida.write("no responsavel: " + str(no_responsavel) + "\n")
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write("rotacao esquerda.\n")
+                arvore.definirFatorBalanceamento(raiz)
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write(str(arvore.altura) + "\n")
+                saida.close
+            elif rdd:
+                saida.write("no responsavel: " + str(no_responsavel) + "\n")
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write("rotacao direita dupla.\n")
+                arvore.definirFatorBalanceamento(raiz)
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write(str(arvore.altura) + "\n")
+                saida.close
+            elif red:
+                saida.write("no responsavel: " + str(no_responsavel) + "\n")
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write("rotacao esquerda dupla.\n")
+                arvore.definirFatorBalanceamento(raiz)
+                arvore.ordem(raiz)
+                saida.write(string_ordem + "\n")
+                resetarStringOrdem()
+                saida.write(str(arvore.altura) + "\n")
+                saida.close
+    saida = open('L10Q1_out.txt', 'a')     
+    saida.write("\n")
+    saida.close
+saida = open('L10Q1_out.txt', 'a')     
+saida.write("\n")
+saida.close
