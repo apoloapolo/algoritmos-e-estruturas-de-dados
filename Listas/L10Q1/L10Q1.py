@@ -113,7 +113,6 @@ entrada = open('L10Q1_in.txt', 'r')
 lista_arvores = []
 for linha in entrada:
     lista_arvores.append(linha.split())
-print(lista_arvores)
 entrada.close
 saida = open('L10Q1_out.txt', 'w')
 saida.close
@@ -121,7 +120,6 @@ saida.close
 for a in lista_arvores:
     arvore = ArvoreAVL()
     raiz = None
-    resetarStringOrdem()
     for i in a:
         no_responsavel = None
         rd = False
